@@ -1,13 +1,14 @@
 package utilities;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.*;
 
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -247,5 +248,149 @@ public class ReusableMethods {
         JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver();
         jse.executeScript("arguments[0].scrollIntoView()", element);
         jse.executeScript("arguments[0].click();", element);
+    }
+
+
+
+    //DropDown VisibleText
+    /*
+        Select select2 = new Select(gun);
+        select2.selectByVisibleText("7");
+
+        //ddmVisibleText(gun,"7"); --> Yukarıdaki kullanım yerine sadece method ile handle edebilirim
+     */
+    public static void ddmVisibleText(WebElement ddm, String secenek) {
+        Select select = new Select(ddm);
+        select.selectByVisibleText(secenek);
+    }
+
+    //DropDown Index
+    public static void ddmIndex(WebElement ddm, int index) {
+        Select select = new Select(ddm);
+        select.selectByIndex(index);
+    }
+
+    //DropDown Value
+    public static void ddmValue(WebElement ddm, String secenek) {
+        Select select = new Select(ddm);
+        select.selectByValue(secenek);
+    }
+
+    //JS Scroll
+    public static void scroll(WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+        js.executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
+    //JS Sayfa Sonu Scroll
+    public static void scrollEnd() {
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+        js.executeScript("window.scrollTo(0,document.body.scrollHeight)");
+    }
+
+    //JS Sayfa Başı Scroll
+    public static void scrollHome() {
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+        js.executeScript("window.scrollTo(0,-document.body.scrollHeight)");
+    }
+
+    //JS SendKeys
+    public static void sendKeysJS(WebElement element, String text) {
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+        js.executeScript("arguments[0].value='" + text + "'", element);
+    }
+
+    //JS SendAttributeValue
+    public static void sendAttributeJS(WebElement element, String text) {
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+        js.executeScript("arguments[0].setAttribute('value','" + text + "')", element);
+    }
+
+    //JS GetAttributeValue
+    public static void getValueByJS(String id, String attributeName) {
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+        String attribute_Value = (String) js.executeScript("return document.getElementById('" + id + "')." + attributeName);
+        System.out.println("Attribute Value: = " + attribute_Value);
+    }
+    public static void clickElementByJS(WebElement element) {
+        JavascriptExecutor jsexecutor = ((JavascriptExecutor) Driver.getDriver());
+        jsexecutor.executeScript("arguments[0].click();", element);
+    }
+
+    public static void cleanByJs(WebElement element) {
+        JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver();
+        jse.executeScript("arguments[0].value = '';", element);
+    }
+    public static void checkTextContains(WebElement element, String text) {
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(15));
+        WebElement elementName = wait.until(ExpectedConditions.visibilityOf(element));
+        if (elementName.getText().trim().contains(text.trim())) {
+            Assert.assertTrue(true);
+        } else
+            Assert.fail(text + " değerini içeren element bulunamadı. Element text :" + elementName.getText());
+    }
+    //Alert ACCEPT
+    public static void alertAccept() {
+        Driver.getDriver().switchTo().alert().accept();
+    }
+
+    //Alert DISMISS
+    public static void alertDismiss() {
+        Driver.getDriver().switchTo().alert().dismiss();
+    }
+
+    //Alert getText()
+    public static void alertText() {
+        Driver.getDriver().switchTo().alert().getText();
+    }
+
+    //Alert promptBox
+    public static void alertprompt(String text) {
+        Driver.getDriver().switchTo().alert().sendKeys(text);
+    }
+
+    //Click Method
+    public static void click(WebElement element) {
+        try {
+            element.click();
+        } catch (Exception e) {
+            JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+            js.executeScript("arguments[0].click();", element);
+        }
+    }
+    //Iframe Index
+    public static void frameIndex(int index) {
+        Driver.getDriver().switchTo().frame(index);
+    }
+
+    //SwitchToWindow1
+    public static void switchToWindow(int sayi) {
+        List<String> tumWindowHandles = new ArrayList<String>(Driver.getDriver().getWindowHandles());
+        Driver.getDriver().switchTo().window(tumWindowHandles.get(sayi));
+    }
+
+    //SwitchToWindow2
+    public static void window(int sayi) {
+        Driver.getDriver().switchTo().window(Driver.getDriver().getWindowHandles().toArray()[sayi].toString());
+    }
+
+    //File Upload Robot Class
+    public static void uploadFile(String dosyaYolu) {
+        try {
+            waitFor(3);
+            StringSelection stringSelection = new StringSelection(dosyaYolu);
+            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
+            Robot robot = new Robot();
+            robot.keyPress(KeyEvent.VK_CONTROL);
+            robot.keyPress(KeyEvent.VK_V);
+            robot.keyRelease(KeyEvent.VK_CONTROL);
+            robot.keyRelease(KeyEvent.VK_V);
+            robot.delay(3000);
+            robot.keyPress(KeyEvent.VK_ENTER);
+            robot.keyRelease(KeyEvent.VK_ENTER);
+            robot.delay(3000);
+        } catch (Exception ignored) {
+
+        }
     }
 }
