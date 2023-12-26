@@ -1,6 +1,7 @@
 package utilities;
 
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -37,7 +38,10 @@ public class Driver {
 
             String browser = ConfigReader.getProperty("browser");
             if ("chrome".equals(browser)) {
-                driver = new ChromeDriver();
+                WebDriverManager.chromedriver().setup();
+                ChromeOptions chromeOptions = new ChromeOptions();
+                chromeOptions.addArguments("--remote-allow-origins=*");
+                driver = new ChromeDriver(chromeOptions);
             } else if ("firefox".equals(browser)) {
                 driver = new FirefoxDriver();
             } else if ("ie".equals(browser)) {
