@@ -1,11 +1,15 @@
 package stepDefinitions;
 
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.eo.Se;
+import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import pages.US08Page;
 import utilities.ConfigReader;
@@ -13,6 +17,9 @@ import utilities.Driver;
 import utilities.ReusableMethods;
 
 import javax.swing.*;
+import java.util.Set;
+
+import static utilities.Driver.driver;
 
 public class US08StepDefinitions {
     US08Page us08Page = new US08Page();
@@ -36,17 +43,27 @@ public class US08StepDefinitions {
     @Then("Kullanici FOR INTERNATIONAL PATIENTS butonu tiklar")
     public void kullaniciButonuTiklar() {
         us08Page.internationalPatients.click();
+        String ilkSayfaHandle = driver.getWindowHandle();
+        Set<String> pencereler = driver.getWindowHandles();
+        for (String w:pencereler) {
+            System.out.println(w);
+            if (!w.equals(ilkSayfaHandle)){
+                driver.switchTo().window(w);
+            }
+        }
+
     }
 
     @Then("Kullanici acilan sayfada istenen bilgileri girer")
     public void kullaniciAcilanSayfadaIstenenBilgileriGirer() {
-        Driver.getDriver().get(ConfigReader.getProperty("acibademinternationalUrl"));
+     //   Driver.getDriver().get(ConfigReader.getProperty("acibademinternationalUrl"));
     }
 
     @Then("Kullanici acilan cookies kapatir")
     public void kullaniciAcilanCookiesKapatir() {
         // ReusableMethods.hooverByJS(us08Page.cookies);
-        us08Page.cookies.click();
+       // us08Page.cookies.click();
+        ReusableMethods.click(us08Page.cookies);
     }
 
     @Then("Kullanici {string} kutusuna isim girer")
@@ -92,15 +109,39 @@ public class US08StepDefinitions {
         us08Page.checkBox.click();
     }
 
-    @Then("Kayit yapildigini dogrula")
-    public void kayitYapildiginiDogrula() {
+//  @Then("Kullanici Send butonunu tiklar")
+//  public void kullaniciSendButonunuTiklar() {
+//      us08Page.sendButton.click();
+//  }
 
-    }
+//  @Then("Kayit yapildigini dogrula")
+//  public static void kayitYapildiginiDogrula() {
+//   String alertyazisi= Driver.getDriver().switchTo().alert().getText();
+//   Assert.assertEquals(alertyazisi.);
+
+//  }
+
 
 
     @Then("Kullanici {int} saniye bekler")
-    public void kullaniciSaniyeBekler(int arg0) throws InterruptedException {
+    public void kullaniciSaniyeBekler(int str) throws InterruptedException {
         Thread.sleep(2000);
+    }
+
+// Negatif Test
+    @Then("Kullanici Name kutusunu bos birakir")
+    public void kullaniciNameKutusunuBosBirakir() {
+        us08Page.name.sendKeys("");
+    }
+
+
+    @Then("Kullanici {string} kutusuna mail adresini com uzantisi olmadan girer")
+    public void kullaniciKutusunaMailAdresiniComUzantisiOlmadanGirer(String str) {
+        us08Page.email.sendKeys("tomkank8s@yahoo");
+    }
+
+    @Then("Hatayi dogrula")
+    public void hatayiDogrula() {
     }
 
 
