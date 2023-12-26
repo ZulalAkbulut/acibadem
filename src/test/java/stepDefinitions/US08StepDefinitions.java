@@ -45,7 +45,8 @@ public class US08StepDefinitions {
 
     @Then("Kullanici acilan cookies kapatir")
     public void kullaniciAcilanCookiesKapatir() {
-        us08Page.cookiesAccept.submit();
+        // ReusableMethods.hooverByJS(us08Page.cookies);
+        us08Page.cookies.click();
     }
 
     @Then("Kullanici {string} kutusuna isim girer")

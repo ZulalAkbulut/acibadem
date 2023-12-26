@@ -43,8 +43,8 @@ public class US08Page {
     @FindBy(xpath = "//*[@id='gridCheck']")
     public WebElement checkBox;
 
-    @FindBy(xpath = "//*[@class='cmplz-btn cmplz-accept']")
-    public WebElement cookiesAccept;
+    @FindBy(xpath = "//*[text()='Accept All']")
+    public WebElement cookies;
 
  //  @FindBy(xpath = "//*[@id='second-form-button']")
  //  public WebElement sendButton;

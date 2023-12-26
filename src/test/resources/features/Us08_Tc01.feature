@@ -1,6 +1,6 @@
 Feature:US08_Uluslararası_hastalar_kayıt_olabilmeli
 
-
+@hmt
   Scenario:
     Given Kullanici acibadem sitesine gider
     Then Kullanici menu butonunu tiklar
@@ -8,12 +8,10 @@ Feature:US08_Uluslararası_hastalar_kayıt_olabilmeli
     Then Kullanici 1 saniye bekler
     Then Kullanici FOR INTERNATIONAL PATIENTS butonu tiklar
     And Kullanici 2 saniye bekler
-  @hmt
-    Scenario:
-    Given Kullanici acilan sayfada istenen bilgileri girer
-    Then Kullanici 1 saniye bekler
+    And Kullanici acilan sayfada istenen bilgileri girer
+    Then Kullanici 8 saniye bekler
     Then Kullanici acilan cookies kapatir
-    Then Kullanici 1 saniye bekler
+    Then Kullanici 8 saniye bekler
     Then Kullanici "Name" kutusuna isim girer
     Then Kullanici 1 saniye bekler
     Then Kullanici "Surname" kutusuna soyisim girer
