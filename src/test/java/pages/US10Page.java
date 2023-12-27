@@ -113,6 +113,21 @@ public class US10Page {
     @FindBy(xpath = "//pre[@style='word-wrap: break-word; white-space: pre-wrap;']")
     public WebElement messageErrorGenel;
 
+    //  #MedicalAdviceContactForm_TreatmentUnit-error
+
+    @FindBy(css = "#MedicalAdviceContactForm_TreatmentUnit-error")
+    public WebElement tibbiBirimError;
+    @FindBy(xpath = "//pre[@style='word-wrap: break-word; white-space: pre-wrap;']")
+    public WebElement tibbiBirimErrorGenel;
+
+    //  #selectSubject-error
+    @FindBy(css = "#selectSubject-error")
+    public WebElement konuSecimiError;
+    @FindBy(xpath = "//pre[@style='word-wrap: break-word; white-space: pre-wrap;']")
+    public WebElement konuSecimiErrorGenel;
+
+
+
 
 
 

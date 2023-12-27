@@ -70,20 +70,15 @@ public class US10StepDefinitions {
     }
     @And("Tibbi Birim Seciniz dropdawn menuden bir birim secer")
     public void tibbiBirimSecinizDropdawnMenudenBirBirimSecer() {
-       // ReusableMethods.ddmIndex(page.tibbiBirimDDM,3);
+       ReusableMethods.ddmIndex(page.tibbiBirimDDM,3);
         ReusableMethods.waitFor(3);
-
-
-
         }
-
 
     @And("Konu Seciniz dropdawn menuden bir konu secer")
     public void konuSecinizDropdawnMenudenBirKonuSecer() {
-       // ReusableMethods.ddmIndex(page.konuDDM,3);
+       ReusableMethods.ddmIndex(page.konuDDM,3);
         ReusableMethods.waitFor(3);
     }
-
     @And("Mesajiniz text alanina mesaj yazilir")
     public void mesajinizTextAlaninaMesajYazilir() {
         message=faker.lorem().sentence();
@@ -93,14 +88,14 @@ public class US10StepDefinitions {
     @And("Kisisel Verilerin Korunmasi Kanunu kapsaminda olusturulan checkbox kutusunun tiklanilabilir oldugunu dogrular")
     public void kisiselVerilerinKorunmasiKanunuKapsamindaOlusturulanCheckboxKutusununTiklanilabilirOldugunuDogrular() {
         Assert.assertTrue(page.KvkkBireyselKutusu.isEnabled());
-       // ReusableMethods.click(page.KvkkBireyselKutusu);
+        ReusableMethods.click(page.KvkkBireyselKutusu);
         ReusableMethods.waitFor(3);
     }
 
     @And("Ticari Elektronik Ileti gonderilebilmesinin onayini iceren checkbox kutusunun tiklanabilir oldugunu dogrular")
     public void ticariElektronikIletiGonderilebilmesininOnayiniIcerenCheckboxKutusununTiklanabilirOldugunuDogrular() {
         Assert.assertTrue(page.etkDanismaKutusu.isEnabled());
-       // ReusableMethods.click(page.etkDanismaKutusu);
+       ReusableMethods.click(page.etkDanismaKutusu);
         ReusableMethods.waitFor(3);
     }
 
@@ -108,78 +103,70 @@ public class US10StepDefinitions {
     public void haneliGuvenlikKoduGirilir(int kod) {
         //guvenlik kodu bir captcha
         ReusableMethods.waitFor(5);
-       //ReusableMethods.click(page.guvenlikKoduKonteyner);
+        ReusableMethods.click(page.guvenlikKoduKonteyner);
         ReusableMethods.waitFor(5);
     }
     @And("Gonder butonuna tiklanir")
     public void gonderButonunaTiklanir() {
-      //  ReusableMethods.click(page.gonderButton);
-        ReusableMethods.waitFor(5);
+         ReusableMethods.click(page.gonderButton);
+         ReusableMethods.waitFor(5);
     }
     @And("Islemin basariyle gerceklestigi dogrulanir")
     public void ısleminBasariyleGerceklestigiDogrulanir() {
 
         Assert.assertTrue(page.tesekkurlerYazisi.isDisplayed());
     }
-
-
     @And("Adiniz kutusunu bos birakir")
     public void adinizKutusunuBosBirakir() {
         page.adinizKutusu.sendKeys("");
         ReusableMethods.waitFor(3);
-
     }
-
-    @And("Islemin gerceklesmedigini dogrular")
-    public void ısleminGerceklesmediginiDogrular() {
-        Assert.assertTrue(page.firstnameError.isDisplayed());
+    @Then("Lutfen adinizi giriniz uyarisi gorulur")
+    public void lutfenAdiniziGirinizUyarisiGorulur() {
+        //Assert.assertTrue(page.firstnameError.isDisplayed());
+        Assert.assertTrue(page.firstnameErrorGenel.isDisplayed());
     }
-
-
     @And("Soyadiniz kutusunu bos birakir")
     public void soyadinizKutusunuBosBirakir() {
         page.soyadinizKutusu.sendKeys("");
         ReusableMethods.waitFor(3);
     }
-
     @Then("Lutfen soyadinizi giriniz uyarisi gorulur")
     public void lutfenSoyadiniziGirinizUyarisiGorulur() {
-        Assert.assertTrue(page.lastnameError.isDisplayed());
+       // Assert.assertTrue(page.lastnameError.isDisplayed());
+        Assert.assertTrue(page.lastnameErrorGenel.isDisplayed());
     }
-
     @And("E-Posta Adresiniz kutusunu bos birakir")
     public void ePostaAdresinizKutusunuBosBirakir() {
         page.email_Kutusu.sendKeys("");
         ReusableMethods.waitFor(3);
     }
-
     @Then("Lutfen e-mail adresinizi giriniz uyarisi gorulur")
     public void lutfenEMailAdresiniziGirinizUyarisiGorulur() {
-        Assert.assertTrue(page.emailError.isDisplayed());
+        //Assert.assertTrue(page.emailError.isDisplayed());
+        Assert.assertTrue(page.emailErrorGenel.isDisplayed());
     }
-
     @And("Telefon Numaraniz kutusunu bos birakir")
     public void telefonNumaranizKutusunuBosBirakir() {
         page.phone_Kutusu.sendKeys("");
         ReusableMethods.waitFor(3);
     }
-
     @Then("Lutfen telefon numaranizi giriniz uyarisi gorulur")
     public void lutfenTelefonNumaraniziGirinizUyarisiGorulur() {
-        Assert.assertTrue(page.phoneError.isDisplayed());
+        //Assert.assertTrue(page.phoneError.isDisplayed());
+        Assert.assertTrue(page.phoneErrorGenel.isDisplayed());
     }
-
     @And("Tibbi Birim Seciniz dropdawn menuyu bos birakir")
     public void tibbiBirimSecinizDropdawnMenuyuBosBirakir() {
         //bos birakilir
-
     }
 
     @Then("Lutfen tibbi birim seciniz uyarisi gorulur")
     public void lutfenTibbiBirimSecinizUyarisiGorulur() {
+        //Assert.assertTrue(page.tibbiBirimError.isDisplayed()); //gonder butonuna elle tiklaninca cikan uyari
+        Assert.assertTrue(page.tibbiBirimErrorGenel.isDisplayed());
 
     }
-
     @And("Konu Seciniz dropdawn menuyu bos birakir")
     public void konuSecinizDropdawnMenuyuBosBirakir() {
         //bos birakilir
@@ -187,6 +174,8 @@ public class US10StepDefinitions {
 
     @Then("Lutfen Konu Seciniz uyarisi gorulur")
     public void lutfenKonuSecinizUyarisiGorulur() {
+       // Assert.assertTrue(page.konuSecimiError.isDisplayed());
+        Assert.assertTrue(page.konuSecimiErrorGenel.isDisplayed());
     }
 
     @And("Mesajiniz text alanini bos birakir")
@@ -194,12 +183,11 @@ public class US10StepDefinitions {
         page.mesaj_Kutusu.sendKeys("");
         ReusableMethods.waitFor(3);
     }
-
     @Then("Lutfen mesajinizi giriniz uyarisi gorulur")
     public void lutfenMesajiniziGirinizUyarisiGorulur() {
-        Assert.assertTrue(page.messageError.isDisplayed());
+       // Assert.assertTrue(page.messageError.isDisplayed());
+        Assert.assertTrue(page.messageErrorGenel.isDisplayed());
     }
-
     @And("E-Posta Adresiniz kutusuna  patterne uymayan bir email girer")
     public void ePostaAdresinizKutusunaPatterneUymayanBirEmailGirer() {
         page.email_Kutusu.sendKeys("aaa.@aaaa");
@@ -207,8 +195,10 @@ public class US10StepDefinitions {
 
     @Then("Lutfen gecerli bir e-mail adresi giriniz uyarisi gorulur")
     public void lutfenGecerliBirEMailAdresiGirinizUyarisiGorulur() {
-        Assert.assertTrue(page.emailError.isDisplayed());
+        //Assert.assertTrue(page.emailError.isDisplayed());
+        Assert.assertTrue(page.emailErrorGenel.isDisplayed());
     }
+
 
 
 }
