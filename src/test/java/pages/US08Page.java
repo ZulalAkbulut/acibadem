@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
 
-import javax.xml.xpath.XPath;
+ import javax.xml.xpath.XPath;
 
 public class US08Page {
     public US08Page() {
@@ -43,11 +43,14 @@ public class US08Page {
     @FindBy(xpath = "//*[@id='gridCheck']")
     public WebElement checkBox;
 
+   // @FindBy(xpath = "//*[text()='Accept All']")
     @FindBy(xpath = "//*[@class='cmplz-btn cmplz-accept']")
-    public WebElement cookiesAccept;
+  //  @FindBy(xpath = "//*[@class='cmplz-btn cmplz-deny']")
 
- //  @FindBy(xpath = "//*[@id='second-form-button']")
- //  public WebElement sendButton;
+    public WebElement cookies;
+
+   @FindBy(xpath = "//*[@id='second-form-button']")
+   public WebElement sendButton;
 
 
 
