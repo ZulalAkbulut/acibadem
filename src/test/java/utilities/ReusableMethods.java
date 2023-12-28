@@ -289,7 +289,7 @@ public class ReusableMethods {
     }
 
     //JS Sayfa Başı Scroll
-    public static void scrollHome() {
+    public static void scrollHome(String s) {
         JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
         js.executeScript("window.scrollTo(0,-document.body.scrollHeight)");
     }
@@ -390,7 +390,20 @@ public class ReusableMethods {
             robot.keyRelease(KeyEvent.VK_ENTER);
             robot.delay(3000);
         } catch (Exception ignored) {
-
         }
     }
+
+
+
+
+
+
+
+
+
+          public static void scrollIntoViewJS(WebElement element){
+            JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+            js.executeScript("arguments[0].scrollIntoView(true);",element);
+    }
+
 }
