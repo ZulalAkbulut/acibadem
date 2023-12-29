@@ -406,4 +406,9 @@ public class ReusableMethods {
             js.executeScript("arguments[0].scrollIntoView(true);",element);
     }
 
+    public static void selectWithValue(WebElement element , String string){
+        Select select= new Select(element);
+        select.selectByValue(string);
+    }
+
 }
