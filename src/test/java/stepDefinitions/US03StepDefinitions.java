@@ -25,15 +25,15 @@ public class US03StepDefinitions {
     Actions actions = new Actions(Driver.getDriver());
     JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver();
 
-
     @Given("Kullanici Anasayfaya gider.")
     public void kullanici_anasayfaya_gider() {
-        Driver.getDriver().get(ConfigReader.getProperty("acibademUrl"));
+       Driver.getDriver().get(ConfigReader.getProperty("acibademUrl"));
     }
+
 
     @When("Kullanici Doktorlar sekmesine gider.")
     public void kullanici_doktorlar_sekmesine_gider() {
-        // us03Page.doktorlarSekmesi.click();
+
         clickWithTimeOut(us03Page.doktorlarSekmesi, 2);
 
         clickWithTimeOut(us03Page.doktorlarSekmesi, 5);
@@ -61,7 +61,7 @@ public class US03StepDefinitions {
 
     @When("Kullanici istedigi Lokasyonu secer.")
     public void kullanici_istedigi_lokasyonu_secer() {
-        // selectRandomTextFromDropdown();
+
         Select select =new Select(us03Page.DrLokasyonSecme);
         List<WebElement> lokasyonlarListe= select.getOptions();
         Random random = new Random();
@@ -116,6 +116,7 @@ public class US03StepDefinitions {
     public void kullanici_istedigi_doktoru_secer() {
         clickWithTimeOut(us03Page.DoktorSecme,2);
     }
+
 
 
 }

@@ -14,7 +14,7 @@ public class US03Page {
 
     @FindBy (xpath = "//span[text()='Doktorlar']")
     public WebElement doktorlarSayfasi;
-    //span[@class='m-nav__link-text']
+
 
     @FindBy (id="location")
     public WebElement DrLokasyonSecme;
